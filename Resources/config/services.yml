@@ -5,6 +5,12 @@ services:
             - { name: data_collector, template: '@BarmSoap/Collector/soap.html.twig', id: 'barm_soap' }
             - { name: kernel.event_listener, event: barm_soap.request_finished, method: onRequestFinished }
 
+    barm_soap.twig.soap_extension:
+        class: Barm\Bundle\SoapBundle\Twig\SoapExtension
+        public: false
+        tags:
+        - { name: twig.extension }
+
     barm_soap.factory:
         class: Barm\Bundle\SoapBundle\Factory
         arguments: ["@event_dispatcher"]

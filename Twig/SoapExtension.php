@@ -12,14 +12,17 @@
 
 namespace Barm\Bundle\SoapBundle\Twig;
 
-class SoapExtension extends \Twig_Extension {
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+
+class SoapExtension extends AbstractExtension {
 
     /**
      * {@inheritdoc}
      */
     public function getFilters() {
         return array(
-            new \Twig_SimpleFilter('barm_soap_pretty_xml', array($this, 'formatXml')),
+            new TwigFilter('barm_soap_pretty_xml', array($this, 'formatXml')),
         );
     }
 
