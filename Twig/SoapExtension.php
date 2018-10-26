@@ -3,38 +3,23 @@
 /*
  * This file is part of the SoapBundle package.
  *
- * (c) 2017 .NFQ | Netzfrequenz GmbH <info@nfq.de>
+ * Original work (c) 2017 .NFQ | Netzfrequenz GmbH <info@nfq.de>
+ * Modified work (c) 2018 Andrew Mikhailyk
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Nfq\Bundle\SoapBundle\Twig;
+namespace Barm\Bundle\SoapBundle\Twig;
 
-use PrettyXml\Formatter;
-
-class SoapExtension extends \Twig_Extension
-{
-    /**
-     * @var Formatter
-     */
-    private $formatter;
-
-    /**
-     * @param Formatter $formatter
-     */
-    public function __construct(Formatter $formatter)
-    {
-        $this->formatter = $formatter;
-    }
+class SoapExtension extends \Twig_Extension {
 
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
-    {
+    public function getFilters() {
         return array(
-            new \Twig_SimpleFilter('nfq_soap_pretty_xml', array($this, 'formatXml')),
+            new \Twig_SimpleFilter('barm_soap_pretty_xml', array($this, 'formatXml')),
         );
     }
 
@@ -47,19 +32,21 @@ class SoapExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function formatXml($xml, $indentSize = 4, $indentCharacter = ' ')
-    {
-        $this->formatter->setIndentSize($indentSize);
-        $this->formatter->setIndentCharacter($indentCharacter);
-
-        return $this->formatter->format($xml);
+    public function formatXml($xml) {
+        $dom = new \DOMDocument();
+        $dom->loadXML($xml);
+        $dom->formatOutput = true;
+        return $this->clearOutput($dom->saveXML());
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
+    public function getName() {
         return get_class($this);
+    }
+
+    private function clearOutput($str) {
+        return str_replace('<?xml version="1.0"?>', '', $str);
     }
 }

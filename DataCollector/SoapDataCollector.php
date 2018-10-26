@@ -3,15 +3,16 @@
 /*
  * This file is part of the SoapBundle package.
  *
- * (c) 2017 .NFQ | Netzfrequenz GmbH <info@nfq.de>
+ * Original work (c) 2017 .NFQ | Netzfrequenz GmbH <info@nfq.de>
+ * Modified work (c) 2018 Andrew Mikhailyk
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Nfq\Bundle\SoapBundle\DataCollector;
+namespace Barm\Bundle\SoapBundle\DataCollector;
 
-use Nfq\Bundle\SoapBundle\Event\RequestFinishedEvent;
+use Barm\Bundle\SoapBundle\Event\RequestFinishedEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
@@ -19,40 +20,35 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 /**
  * SoapDataCollector.
  *
- * This is listening on nfq_soap.request_finished events and populates data
+ * This is listening on barm_soap.request_finished events and populates data
  * according to event data.
  */
-class SoapDataCollector extends DataCollector
-{
+class SoapDataCollector extends DataCollector {
     /**
      * Constructor.
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->reset();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
-    {
+    public function collect(Request $request, Response $response, \Exception $exception = null) {
         // Do nothing here. Everything is being handled by events.
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'nfq_soap';
+    public function getName() {
+        return 'barm_soap';
     }
 
     /**
      * Resets this data collector to its initial state.
      */
-    public function reset()
-    {
+    public function reset() {
         $this->data = array(
             'total' => 0,
             'time' => 0,
@@ -65,8 +61,7 @@ class SoapDataCollector extends DataCollector
      *
      * @param RequestFinishedEvent $event
      */
-    public function onRequestFinished(RequestFinishedEvent $event)
-    {
+    public function onRequestFinished(RequestFinishedEvent $event) {
         $request = array(
             'request_headers' => $event->getRequestHeaders(),
             'request_body' => $event->getRequestBody(),
@@ -83,24 +78,21 @@ class SoapDataCollector extends DataCollector
     /**
      * @return int
      */
-    public function getTotal()
-    {
+    public function getTotal() {
         return $this->data['total'];
     }
 
     /**
      * @return int Time in milliseconds.
      */
-    public function getTime()
-    {
+    public function getTime() {
         return $this->data['time'];
     }
 
     /**
      * @return array
      */
-    public function getRequests()
-    {
+    public function getRequests() {
         return $this->data['requests'];
     }
 }

@@ -1,22 +1,21 @@
 {
-    "name": "nfqde/soap-bundle",
+    "name": "barm/soap-bundle",
     "type": "symfony-bundle",
     "description": "Symfony wrapper for SoapClient",
     "keywords": ["symfony", "soap"],
-    "homepage": "https://github.com/nfqde/soap-bundle",
+    "homepage": "https://github.com/Djengobarm/soap-bundle",
     "license": "MIT",
     "autoload": {
-        "psr-4": { "Nfq\\Bundle\\SoapBundle\\": "" }
+        "psr-4": { "Barm\\Bundle\\SoapBundle\\": "" }
     },
     "require": {
-        "php": ">=5.3.3",
+        "php": "^7.1.3",
         "ext-soap": "*",
-        "symfony/dependency-injection": "~2.3|~3.0",
-        "symfony/config": "~2.3|~3.0",
-        "symfony/http-kernel": "~2.3|~3.0",
-        "shanethehat/pretty-xml": "^1.0.2"
+        "symfony/dependency-injection": "^4.1",
+        "symfony/config": "^4.1",
+        "symfony/http-kernel": "^4.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^7.4"
     }
 }

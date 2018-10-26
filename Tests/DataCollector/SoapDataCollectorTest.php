@@ -1,20 +1,28 @@
 <?php
 
-namespace Nfq\Bundle\SoapBundle\Tests\DataCollector;
+/*
+ * This file is part of the SoapBundle package.
+ *
+ * Original work (c) 2017 .NFQ | Netzfrequenz GmbH <info@nfq.de>
+ * Modified work (c) 2018 Andrew Mikhailyk
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-use Nfq\Bundle\SoapBundle\DataCollector\SoapDataCollector;
-use Nfq\Bundle\SoapBundle\Event\RequestFinishedEvent;
+namespace Barm\Bundle\SoapBundle\Tests\DataCollector;
+
+use Barm\Bundle\SoapBundle\DataCollector\SoapDataCollector;
+use Barm\Bundle\SoapBundle\Event\RequestFinishedEvent;
 
 /**
  * @see SoapDataCollector
  */
-class SoapDataCollectorTest extends \PHPUnit_Framework_TestCase
-{
+class SoapDataCollectorTest extends \PHPUnit_Framework_TestCase {
     /**
      * @dataProvider dataProvideOnRequestFinished
      */
-    public function testOnRequestFinished($events, $expectedTotal, $expectedTime)
-    {
+    public function testOnRequestFinished($events, $expectedTotal, $expectedTime) {
         $collector = new SoapDataCollector();
 
         foreach ($events as $event) {
@@ -26,8 +34,7 @@ class SoapDataCollectorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedTotal, count($collector->getRequests()));
     }
 
-    public function dataProvideOnRequestFinished()
-    {
+    public function dataProvideOnRequestFinished() {
         return array(
             array(array(), 0, 0),
             array(

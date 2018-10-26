@@ -3,21 +3,21 @@
 /*
  * This file is part of the SoapBundle package.
  *
- * (c) 2017 .NFQ | Netzfrequenz GmbH <info@nfq.de>
+ * Original work (c) 2017 .NFQ | Netzfrequenz GmbH <info@nfq.de>
+ * Modified work (c) 2018 Andrew Mikhailyk
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Nfq\Bundle\SoapBundle\Event;
+namespace Barm\Bundle\SoapBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Event being thrown after successful SOAP request/response cycle.
  */
-class RequestFinishedEvent extends Event
-{
+class RequestFinishedEvent extends Event {
     /**
      * @var string
      */
@@ -50,8 +50,7 @@ class RequestFinishedEvent extends Event
      * @param string $responseBody
      * @param float  $duration
      */
-    public function __construct($requestHeaders, $requestBody, $responseHeaders, $responseBody, $duration)
-    {
+    public function __construct($requestHeaders, $requestBody, $responseHeaders, $responseBody, $duration) {
         $this->requestHeaders = $requestHeaders;
         $this->requestBody = $requestBody;
         $this->responseHeaders = $responseHeaders;
@@ -62,40 +61,35 @@ class RequestFinishedEvent extends Event
     /**
      * @return string
      */
-    public function getRequestHeaders()
-    {
+    public function getRequestHeaders() {
         return $this->requestHeaders;
     }
 
     /**
      * @return string
      */
-    public function getRequestBody()
-    {
+    public function getRequestBody() {
         return $this->requestBody;
     }
 
     /**
      * @return string
      */
-    public function getResponseHeaders()
-    {
+    public function getResponseHeaders() {
         return $this->responseHeaders;
     }
 
     /**
      * @return string
      */
-    public function getResponseBody()
-    {
+    public function getResponseBody() {
         return $this->responseBody;
     }
 
     /**
      * @return float
      */
-    public function getDuration()
-    {
+    public function getDuration() {
         return $this->duration;
     }
 }

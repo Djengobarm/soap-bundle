@@ -3,21 +3,21 @@
 /*
  * This file is part of the SoapBundle package.
  *
- * (c) 2017 .NFQ | Netzfrequenz GmbH <info@nfq.de>
+ * Original work (c) 2017 .NFQ | Netzfrequenz GmbH <info@nfq.de>
+ * Modified work (c) 2018 Andrew Mikhailyk
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Nfq\Bundle\SoapBundle;
+namespace Barm\Bundle\SoapBundle;
 
 /**
  * Events that are being dispatched by SoapBundle.
  */
-class NfqSoapEvents
-{
+class BarmSoapEvents {
     /**
      * @see Event\RequestFinishedEvent
      */
-    const REQUEST_FINISHED = 'nfq_soap.request_finished';
+    const REQUEST_FINISHED = 'barm_soap.request_finished';
 }

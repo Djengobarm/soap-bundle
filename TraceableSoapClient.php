@@ -3,22 +3,22 @@
 /*
  * This file is part of the SoapBundle package.
  *
- * (c) 2017 .NFQ | Netzfrequenz GmbH <info@nfq.de>
+ * Original work (c) 2017 .NFQ | Netzfrequenz GmbH <info@nfq.de>
+ * Modified work (c) 2018 Andrew Mikhailyk
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Nfq\Bundle\SoapBundle;
+namespace Barm\Bundle\SoapBundle;
 
-use Nfq\Bundle\SoapBundle\Event\RequestFinishedEvent;
+use Barm\Bundle\SoapBundle\Event\RequestFinishedEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * TraceableSoapClient.
  */
-class TraceableSoapClient extends \SoapClient
-{
+class TraceableSoapClient extends \SoapClient {
     /**
      * @var EventDispatcherInterface
      */
@@ -36,8 +36,7 @@ class TraceableSoapClient extends \SoapClient
      * @param string                   $wsdl
      * @param array                    $options
      */
-    public function __construct(EventDispatcherInterface $dispatcher, $wsdl, $options = [])
-    {
+    public function __construct(EventDispatcherInterface $dispatcher, $wsdl, $options = []) {
         if (isset($options['trace']) && !$options['trace']) {
             @trigger_error('TraceableSoapClient reset trace option to true', E_USER_NOTICE);
         }
@@ -51,8 +50,7 @@ class TraceableSoapClient extends \SoapClient
     /**
      * {@inheritdoc}
      */
-    public function __doRequest($request, $location, $action, $version, $one_way = 0)
-    {
+    public function __doRequest($request, $location, $action, $version, $one_way = 0) {
         $startTime = microtime(true);
         $response = parent::__doRequest($request, $location, $action, $version, $one_way);
         $this->lastDuration = (microtime(true) - $startTime) * 1000;
@@ -64,7 +62,7 @@ class TraceableSoapClient extends \SoapClient
             $response,
             $this->lastDuration
         );
-        $this->dispatcher->dispatch(NfqSoapEvents::REQUEST_FINISHED, $event);
+        $this->dispatcher->dispatch(BarmSoapEvents::REQUEST_FINISHED, $event);
 
         return $response;
     }
@@ -74,8 +72,7 @@ class TraceableSoapClient extends \SoapClient
      *
      * @return int
      */
-    public function __getLastDuration()
-    {
+    public function __getLastDuration() {
         return $this->lastDuration;
     }
 }

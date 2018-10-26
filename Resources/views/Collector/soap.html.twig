@@ -1,4 +1,4 @@
-{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
 {% block toolbar %}
     {% if collector.total > 0 %}
@@ -10,7 +10,7 @@
                 <span class="sf-toolbar-value sf-toolbar-status">{{ collector.total }}</span>
                 <span class="sf-toolbar-info-piece-additional-detail">in {{ '%0.2f'|format(collector.time) }} ms</span>
             {% else %}
-                {{ include('@NfqSoap/Collector/icon.svg') }}
+                {{ include('@BarmSoap/Collector/icon.svg') }}
                 <span class="sf-toolbar-value">{{ collector.total }}</span>
                 <span class="sf-toolbar-info-piece-additional-detail">
                     <span class="sf-toolbar-label">in</span>
@@ -51,7 +51,7 @@
         </span>
     {% else %}
         <span class="label {{ collector.total == 0 ? 'disabled' }}">
-            <span class="icon">{{ include('@NfqSoap/Collector/icon.svg') }}</span>
+            <span class="icon">{{ include('@BarmSoap/Collector/icon.svg') }}</span>
             <strong>Soap</strong>
         </span>
     {% endif %}
@@ -124,12 +124,13 @@
                         <td>
                             <a href="#" class="sf-toggle link-inverse text-small" data-toggle-selector="#soap-request-headers-{{ loop.index }}" data-toggle-alt-content="Hide headers"{{ profiler_markup_version == 1 ? 'onclick="return toggle(this);"' }}>Show headers</a>
                             <div id="soap-request-headers-{{ loop.index }}" class="hidden sf-toggle-content">{{ request.request_headers|nl2br }}</div>
-                            <pre>{{ request.request_body|nfq_soap_pretty_xml }}</pre>
+
+                            <pre>{{ request.request_body|barm_soap_pretty_xml }}</pre>
 
                             <a href="#" class="sf-toggle link-inverse text-small" data-toggle-selector="#soap-response-{{ loop.index }}" data-toggle-alt-content="Hide response"{{ profiler_markup_version == 1 ? 'onclick="return toggle(this);"' }}>Show response</a>
                             <div id="soap-response-{{ loop.index }}" class="hidden sf-toggle-content soap-response-container">
                                 <div style="margin-bottom: 15px;">{{ request.response_headers|nl2br }}</div>
-                                <pre>{{ request.response_body|nfq_soap_pretty_xml }}</pre>
+                                <pre>{{ request.response_body|barm_soap_pretty_xml }}</pre>
                             </div>
                         </td>
                     </tr>

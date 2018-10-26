@@ -1,4 +1,4 @@
-SoapBundle [![Build Status](https://travis-ci.org/nfqde/soap-bundle.svg?branch=master)](https://travis-ci.org/nfqde/soap-bundle)
+SoapBundle [![Build Status](https://travis-ci.org/barmde/soap-bundle.svg?branch=master)](https://travis-ci.org/barmde/soap-bundle)
 ==========
 
 SoapBundle provides functionality for PHP SoapClient to be traceable by Symfony WebProfiler.
@@ -14,7 +14,7 @@ SoapBundle provides functionality for PHP SoapClient to be traceable by Symfony 
 
 1. Add this bundle to your project as composer dependency
     ```bash
-    composer require nfqde/soap-bundle
+    composer require barm/soap-bundle
     ```
 
 1. Add this bundle in application kernel
@@ -23,7 +23,7 @@ SoapBundle provides functionality for PHP SoapClient to be traceable by Symfony 
     public function registerBundles()
     {
         // ...
-        $bundles[] = new Nfq\Bundle\SoapBundle\NfqSoapBundle();
+        $bundles[] = new Barm\Bundle\SoapBundle\BarmSoapBundle();
 
         return $bundles;
     }
@@ -32,7 +32,7 @@ SoapBundle provides functionality for PHP SoapClient to be traceable by Symfony 
 ## Usage
 
 Instead of creating SoapClient like `new \SoapClient($wsdl, $optionalOptions)`
-you SHOULD create it via `$container->get('nfq_soap.factory')->create($wsdl, $optionalOptions)`
+you SHOULD create it via `$container->get('barm_soap.factory')->create($wsdl, $optionalOptions)`
 which returns an instance of SoapClient.
 
 ```php
@@ -40,7 +40,7 @@ which returns an instance of SoapClient.
 $oldSoapClient = new \SoapClient($wsdl);
 
 // New way
-$client = $container->get('nfq_soap.factory')->create($wsdl);
+$client = $container->get('barm_soap.factory')->create($wsdl);
 ```
 
 ```yml
@@ -54,7 +54,7 @@ services:
 services:
     new_soap_client:
         class: SoapClient
-        factory: ["@nfq_soap.factory", create]
+        factory: ["@barm_soap.factory", create]
         arguments: ["%wsdl_url%"]
 ```
 

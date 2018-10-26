@@ -1,21 +1,10 @@
 services:
-    nfq_soap.data_collector:
-        class: Nfq\Bundle\SoapBundle\DataCollector\SoapDataCollector
+    barm_soap.data_collector:
+        class: Barm\Bundle\SoapBundle\DataCollector\SoapDataCollector
         tags:
-            - { name: data_collector, template: '@NfqSoap/Collector/soap.html.twig', id: 'nfq_soap' }
-            - { name: kernel.event_listener, event: nfq_soap.request_finished, method: onRequestFinished }
+            - { name: data_collector, template: '@BarmSoap/Collector/soap.html.twig', id: 'barm_soap' }
+            - { name: kernel.event_listener, event: barm_soap.request_finished, method: onRequestFinished }
 
-    nfq_soap.factory:
-        class: Nfq\Bundle\SoapBundle\Factory
+    barm_soap.factory:
+        class: Barm\Bundle\SoapBundle\Factory
         arguments: ["@event_dispatcher"]
-
-    nfq_soap.pretty_xml_formatter:
-        class: PrettyXml\Formatter
-        public: false
-
-    nfq_soap.twig.soap_extension:
-        class: Nfq\Bundle\SoapBundle\Twig\SoapExtension
-        arguments: ["@nfq_soap.pretty_xml_formatter"]
-        public: false
-        tags:
-            - { name: twig.extension }
