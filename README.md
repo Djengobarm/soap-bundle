@@ -2,6 +2,7 @@ SoapBundle [![Build Status](https://travis-ci.org/Djengobarm/soap-bundle.svg?bra
 ==========
 
 SoapBundle provides functionality for PHP SoapClient to be traceable by Symfony WebProfiler.
+Compatible with Symfony 4+.
 
 ![SoapBundle Promo](Resources/assets/promo.png)
 
