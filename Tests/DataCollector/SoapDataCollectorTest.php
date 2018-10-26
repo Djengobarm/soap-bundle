@@ -12,13 +12,14 @@
 
 namespace Barm\Bundle\SoapBundle\Tests\DataCollector;
 
+use PHPUnit\Framework\TestCase;
 use Barm\Bundle\SoapBundle\DataCollector\SoapDataCollector;
 use Barm\Bundle\SoapBundle\Event\RequestFinishedEvent;
 
 /**
  * @see SoapDataCollector
  */
-class SoapDataCollectorTest extends \PHPUnit_Framework_TestCase {
+final class SoapDataCollectorTest extends TestCase {
     /**
      * @dataProvider dataProvideOnRequestFinished
      */
